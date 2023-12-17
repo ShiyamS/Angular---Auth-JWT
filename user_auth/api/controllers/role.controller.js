@@ -1,17 +1,18 @@
 import Role from "../models/Role.js";
-
+import { CreateError } from "../utils/error.js";
+import { CreateSuccess } from "../utils/success.js";
 export const createRole = async (req, res, next) => {
     try {
         if (req.body.role && req.body.role !== '') {
             const newRole = new Role(req.body);
             await newRole.save();
-            return res.send("Role Created");
+            return next(CreateSuccess(200, "Role Created"))
         } else {
-            return res.status(400).send('Bad Request')
+            return next(CreateError(400, "Bad Reques"))
         }
     }
     catch (error) {
-        return res.status(500).send("Internal Server Error")
+        return next(CreateError(505, "Internal server error!"))
     }
 }
 
@@ -26,13 +27,13 @@ export const updateRole = async (req, res, next) => {
                 { $set: req.body },
                 { new: true }
             )
-            return res.status(200).send("Role updated !")
+            return next(CreateSuccess(200, "Role updated !"))
         } else {
-            return res.status(404).send("Role not foumd !")
+            return next(CreateError(404, "Role not foumd !"))
         }
 
     } catch (error) {
-
+        return next(CreateError(505, "Internal server error!"))
     }
 }
 
@@ -40,10 +41,10 @@ export const getAllRoles = async (req, res, next) => {
     try {
         const roles = await Role.find({});
         if (roles) {
-            return res.status(200).send(roles);
+            return next(CreateSuccess(200, "All Role ", roles))
         }
     } catch (error) {
-        res.status(500).send("Internal Server Error !")
+        return next(CreateError(505, "Internal server error!"))
     }
 }
 
@@ -53,12 +54,12 @@ export const deleteRole = async (req, res, next) => {
         const role = await Role.findById({ _id: roleId });
         if (role) {
             const deleteRole = await Role.findByIdAndDelete(role)
-            return res.status(200).send("Role Deleted !")
+            return next(CreateSuccess(200, "Role Deleted "))
         } else {
-            return res.status(404).send("Role not foumd !")
+            return next(CreateError(404, "Role not foumd !"))
         }
     } catch (error) {
-        return res.status(500).send("Internal Server Error !")
+        return next(CreateError(505, "Internal server error!"))
 
     }
 }

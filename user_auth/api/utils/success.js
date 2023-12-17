@@ -1,4 +1,4 @@
-export const createSuccess = (statusCode, successMessage, data) => {
+export const CreateSuccess = (statusCode, successMessage, data) => {
     const successObj = {
         status: statusCode,
         message: successMessage,
