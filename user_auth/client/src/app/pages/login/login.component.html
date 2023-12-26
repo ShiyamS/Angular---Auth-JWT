@@ -1,0 +1,30 @@
+<div class="lg:w-3/12 mt-8 p-20 shadow-2xl mx-auto">
+  <h3 class="text-3xl text-center font-semibold py-5">Login</h3>
+  <form class="flex flex-col" [formGroup]="loginForm" (ngSubmit)="loginUser()">
+
+    <div class=" flex flex-col mt-4 mb-1">
+      <input class="p-2 border border-gray-300 rounded" type="email" placeholder="Email" formControlName="email">
+      <span class="text-red-500" *ngIf="loginForm.hasError('required','email') && loginForm.controls['email'].touched">
+        * Email is
+        required</span>
+      <span class="text-red-500" *ngIf="loginForm.hasError('email','email')"> * Email is
+        not valid</span>
+    </div>
+
+    <div class=" flex flex-col mt-4 mb-1">
+      <input class="p-2 border border-gray-300 rounded" type="password" placeholder="Password"
+        formControlName="password">
+      <span class="text-red-500"
+        *ngIf="loginForm.hasError('required','password') && loginForm.controls['password'].touched"> * Password is
+        required</span>
+      <span class="text-red-500" *ngIf="loginForm.hasError('loginPasswordIncorrect','password')"> * Password is
+        Incorrect </span>
+    </div>
+    <button [disabled]="loginForm.invalid" [class.disabled]="loginForm.invalid" type="submit"
+      class="bg-indigo-500 rounded text-white p-4 mt-5 font-semibold">Login</button>
+  </form>
+  <div class=" flex justify-between mt-6">
+    <a routerLink="/forget-password" class="text-indigo-600 ml-2 cursor-pointer">Forgot Password ?</a>
+    <a routerLink="/register" class="text-indigo-600 ml-2 cursor-pointer">Sign Up Here</a>
+  </div>
+</div>
