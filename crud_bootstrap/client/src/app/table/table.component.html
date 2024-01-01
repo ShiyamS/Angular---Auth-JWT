@@ -1,0 +1,40 @@
+<div class="container mt-3">
+  <table class="table table-hover" style="background-color: rgb(224, 221, 221);">
+    <thead>
+      <tr>
+        <th scope="col">Employee ID</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email ID</th>
+        <th scope="col">Mobile Number</th>
+        <th scope="col">Salary</th>
+        <th scope="col" colspan="2">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for( employee of allEmplyomeeDetails; track employee.id ){
+      <tr>
+        <th scope="row">{{employee.id}}</th>
+        <td>{{employee.firstname}}</td>
+        <td>{{employee.lastname}}</td>
+        <td>{{employee.emailid}}</td>
+        <td>{{employee.mobilenumber}}</td>
+        <td>{{employee.salary}}</td>
+        <td>
+          <div class="d-flex ">
+            <button class="btn btn-warning me-2" style="color: white;" data-bs-toggle="modal"
+              data-bs-target="#exampleModal">Edit</button>
+            <button class="btn btn-danger">Delete</button>
+          </div>
+        </td>
+      </tr>
+      }
+      @empty {
+      <tr>
+        <th class="" style=" text-align: center;" colspan="6">No Employee Details are present !</th>
+      </tr>
+      }
+
+    </tbody>
+  </table>
+</div>

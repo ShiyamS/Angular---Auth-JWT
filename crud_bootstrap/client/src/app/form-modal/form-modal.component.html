@@ -1,0 +1,77 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Employee</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="needs-validation" [formGroup]="addEmployee" (ngSubmit)="addEmployeDetails()">
+          <div class="mb-3">
+            <label for="firstname" class="col-form-label">First Name</label>
+            <input type="text" class="form-control" placeholder="Enter your First Name"
+              [ngClass]="{'is-invalid': addEmployee.get('firstName')?.errors?.['required'] && addEmployee.get('firstName')?.touched  }"
+              id="firstname" formControlName="firstName" required>
+            <div class="invalid-feedback"
+              *ngIf="addEmployee.get('firstName')?.errors?.['required'] && addEmployee.get('firstName')?.touched">
+              First
+              Name is required</div>
+          </div>
+          <div class="mb-3">
+            <label for="lastname" class="col-form-label">Last Name</label>
+            <input type="text" class="form-control" placeholder="Enter your Last Name"
+              [ngClass]="{'is-invalid': addEmployee.get('lastName')?.errors?.['required'] && addEmployee.get('lastName')?.touched  }"
+              id="lastname" formControlName="lastName">
+            <div class="invalid-feedback"
+              *ngIf="addEmployee.get('lastName')?.errors?.['required'] && addEmployee.get('lastName')?.touched">
+              Last
+              Name is required</div>
+          </div>
+          <div class="mb-3">
+            <label for="emaiid" class="col-form-label">Email ID</label>
+            <input type="email" class="form-control" placeholder="Enter your Email ID"
+              [ngClass]="{'is-invalid': (addEmployee.get('emailId')?.errors?.['required']  || addEmployee.get('emailId')?.errors?.['email'] )&& addEmployee.get('emailId')?.touched  }"
+              id="emaiid" formControlName="emailId">
+            <div class="invalid-feedback" *ngIf="addEmployee.get('emailId')?.touched">
+              <span *ngIf="addEmployee.get('emailId')?.errors?.['email'] ">
+                Enter valid Email ID</span>
+              <span *ngIf="addEmployee.get('emailId')?.errors?.['required']">
+                Email ID is required</span>
+            </div>
+
+          </div>
+          <div class="mb-3">
+            <label for="mobilenumber" class="col-form-label">Mobile Number</label>
+            <input type="text" class="form-control" placeholder="Enter your Mobile Number"
+              [ngClass]="{'is-invalid': (addEmployee.get('mobileNumber')?.errors?.['required']  || addEmployee.get('mobileNumber')?.errors?.['pattern'] ) && addEmployee.get('mobileNumber')?.touched  }"
+              id="mobilenumber" formControlName="mobileNumber">
+            <div class="invalid-feedback" *ngIf="addEmployee.get('mobileNumber')?.touched">
+              <span *ngIf="addEmployee.get('mobileNumber')?.errors?.['pattern'] ">
+                Enter valid Mobile Number</span>
+              <span *ngIf="addEmployee.get('mobileNumber')?.errors?.['required']">
+                Mobile Number is required</span>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="salary" class="col-form-label">Salary in Rupees</label>
+            <input type="text" class="form-control" placeholder="Enter your Salary detail"
+              [ngClass]="{'is-invalid': (addEmployee.get('salary')?.errors?.['required']  || addEmployee.get('salary')?.errors?.['pattern'] ) && addEmployee.get('salary')?.touched  }"
+              id="salary" formControlName="salary">
+            <div class="invalid-feedback" *ngIf="addEmployee.get('salary')?.touched">
+              <span *ngIf="addEmployee.get('salary')?.errors?.['pattern'] ">
+                Enter valid Salary Number</span>
+              <span *ngIf="addEmployee.get('salary')?.errors?.['required']">
+                Salary is required</span>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" #modalClose class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" [disabled]="addEmployee.invalid">Add</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

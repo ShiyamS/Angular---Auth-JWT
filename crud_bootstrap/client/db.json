@@ -1,0 +1,62 @@
+{
+  "posts": [
+    {
+      "firstname": "Shiyam",
+      "lastname": "S",
+      "emailid": "shiyams315@gmail.com",
+      "mobilenumber": "09655252516",
+      "salary": "2121212",
+      "id": 1
+    },
+    {
+      "firstname": "Shiyam",
+      "lastname": "S",
+      "emailid": "shiyams315@gmail.com",
+      "mobilenumber": "09655252516",
+      "salary": "121",
+      "id": 2
+    },
+    {
+      "firstname": "Shiyam",
+      "lastname": "S",
+      "emailid": "shiyams315@gmail.com",
+      "mobilenumber": "09655252516",
+      "salary": "343",
+      "id": 3
+    },
+    {
+      "firstname": "Shiyam",
+      "lastname": "S",
+      "emailid": "shiyams315@gmail.com",
+      "mobilenumber": "09655252516",
+      "salary": "12",
+      "id": 4
+    },
+    {
+      "firstname": "Shiyam",
+      "lastname": "S",
+      "emailid": "shiyams315@gmail.com",
+      "mobilenumber": "09655252516",
+      "salary": "22222222",
+      "id": 5
+    },
+    {
+      "firstname": "Shiyam",
+      "lastname": "S",
+      "emailid": "shiyams315@gmail.com",
+      "mobilenumber": "09655252516",
+      "salary": "8888888888888888888",
+      "id": 6
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
