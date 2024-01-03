@@ -24,6 +24,8 @@ export class FormModalComponent implements OnInit {
   renderer = inject(Renderer2)
   sharedService = inject(SharedService)
 
+  isUpdate: boolean = false;
+  updateEmpId: any = null;
 
   @ViewChild('modalClose')
   Close!: ElementRef;
@@ -43,10 +45,42 @@ export class FormModalComponent implements OnInit {
     this.sharedService.addEmplopeeClick.subscribe({
       next: (res) => {
         this.isOpen = res;
+        console.log("Add emp called")
       }, error: (err) => {
         console.log(err)
       }
     })
+
+    this.sharedService.addEmplopeeClick.subscribe({
+      next: (res) => {
+        this.addEmployee.reset();
+      }
+    })
+
+    this.sharedService.updateAEmployeeDetail.subscribe({
+      next: (res: any) => {
+        console.log("In modal comp", res);
+        if (res.id) {
+          console.log("In modal lenght::", res);
+          this.addEmployee.setValue({
+            firstName: res.firstname,
+            lastName: res.lastname,
+            emailId: res.emailid,
+            mobileNumber: res.mobilenumber,
+            salary: res.salary
+          })
+          this.isUpdate = true;
+          this.updateEmpId = res.id;
+        }
+
+      }
+    })
+
+
+  }
+
+  resetForm() {
+    this.addEmployee.reset();
   }
 
   addEmployeDetails() {
@@ -66,11 +100,38 @@ export class FormModalComponent implements OnInit {
         this.addEmployee.reset();
         this.Close.nativeElement.click();
         this.sharedService.getAllEmployee();
-
       },
       error: (err) => {
         console.error(err)
       }
     })
+  }
+
+  updateEmployee() {
+
+    const { firstName, lastName, emailId, mobileNumber, salary } = this.addEmployee.value;
+    console.log(this.addEmployee.value);
+    this.employeeDetail.firstname = firstName;
+    this.employeeDetail.lastname = lastName;
+    this.employeeDetail.emailid = emailId;
+    this.employeeDetail.mobilenumber = mobileNumber;
+    this.employeeDetail.salary = salary;
+
+    this.sharedService.updateEmployee(this.employeeDetail, this.updateEmpId).subscribe({
+      next: (res) => {
+        alert("employee updated !")
+        this.addEmployee.reset();
+        this.Close.nativeElement.click();
+        this.sharedService.getAllEmployee();
+        this.isUpdate = false;
+        this.updateEmpId = null;
+
+      }
+    })
+  }
+
+  closeModal() {
+    this.isUpdate = false;
+    this.updateEmpId = null;
   }
 }

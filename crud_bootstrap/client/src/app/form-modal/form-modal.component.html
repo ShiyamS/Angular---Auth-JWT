@@ -66,8 +66,15 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" #modalClose class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" #modalClose class="btn btn-secondary" data-bs-dismiss="modal"
+              (close)="closeModal()">Close</button>
+            @if(isUpdate){
+            <button type="button" class="btn btn-primary" [disabled]="addEmployee.invalid"
+              (click)="updateEmployee()">Update</button>
+            }
+            @else{
             <button type="submit" class="btn btn-primary" [disabled]="addEmployee.invalid">Add</button>
+            }
           </div>
         </form>
       </div>

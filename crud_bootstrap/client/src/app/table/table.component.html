@@ -23,8 +23,8 @@
         <td>
           <div class="d-flex ">
             <button class="btn btn-warning me-2" style="color: white;" data-bs-toggle="modal"
-              data-bs-target="#exampleModal">Edit</button>
-            <button class="btn btn-danger">Delete</button>
+              data-bs-target="#exampleModal" (click)="editEmpoylee(employee)">Edit</button>
+            <button class="btn btn-danger" (click)="deleteEmpoylee(employee.id)">Delete</button>
           </div>
         </td>
       </tr>

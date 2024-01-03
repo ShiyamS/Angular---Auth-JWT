@@ -14,11 +14,17 @@ export class SharedService {
   addEmplopeeClick = new BehaviorSubject(false);
   activeAddEmployeeData = new BehaviorSubject([]);
 
+  updateAEmployeeDetail = new BehaviorSubject([]);
+
+
   activeEmployeeData = this.activeAddEmployeeData.asObservable();
 
   emitAddEmployeeClick() {
     this.addEmplopeeClick.next(true)
   }
+
+
+
 
   postEmployee(data: any) {
     return this.http.post<any>('http://localhost:3000/posts', data).pipe(map((res: any) => {
@@ -37,17 +43,21 @@ export class SharedService {
   }
 
   updateEmployee(data: any, id: number) {
-    return this.http.put<any>('http://localhost:3000/posts' + id, data).pipe(map((res: any) => {
+    return this.http.put<any>('http://localhost:3000/posts/' + id, data).pipe(map((res: any) => {
       return res
     }))
   }
 
 
-  deleteEmployee(data: any, id: number) {
-    return this.http.delete<any>('http://localhost:3000/posts' + id).pipe(map((res: any) => {
+  deleteEmployee(id: number) {
+    return this.http.delete<any>('http://localhost:3000/posts/' + id).pipe(map((res: any) => {
       return res
     }))
   }
 
+
+  updateAEmpDetail(data: any) {
+    this.updateAEmployeeDetail.next(data)
+  }
 
 }

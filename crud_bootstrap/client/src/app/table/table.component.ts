@@ -1,6 +1,7 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { SharedService } from '../shared-service';
 import { EmployeeDetail } from '../employee-detail model';
+import { FormModalComponent } from '../form-modal/form-modal.component';
 
 @Component({
   selector: 'app-table',
@@ -14,6 +15,7 @@ export class TableComponent implements OnInit {
   allEmplyomeeDetails!: any;
 
   sharedService = inject(SharedService)
+  @ViewChild(FormModalComponent) formModalComponent!: FormModalComponent;
 
   ngOnInit(): void {
     this.sharedService.activeEmployeeData.subscribe({
@@ -26,5 +28,18 @@ export class TableComponent implements OnInit {
 
   }
 
+
+  editEmpoylee(employee: any) {
+    this.sharedService.updateAEmpDetail(employee);
+  }
+
+  deleteEmpoylee(id: number) {
+    this.sharedService.deleteEmployee(id).subscribe({
+      next: (res) => {
+        alert("Employee is deleted");
+        this.sharedService.getAllEmployee();
+      }
+    })
+  }
 
 }
